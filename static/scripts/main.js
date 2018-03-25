@@ -11,7 +11,7 @@ function getRates() {
     function updateRates(code, data, i) {
         setTimeout(function () {
             let $currencyContainer = $('[data-code=' + code + ']')
-            let oldValue = parseFloat($currencyContainer.find('.rate').html())
+            let oldValue = parseFloat($currencyContainer.find('.rate').html().split('$')[1])
             let newValue = parseFloat(data.rate).toFixed(2);
 
             $currencyContainer.find('.rate').html('$'+newValue)
@@ -23,6 +23,7 @@ function getRates() {
             if (oldValue != newValue) {
                 $currencyContainer.find('.rate').velocity("transition.flipBounceYIn")
             }
+            console.log(i * 250)
         }, i * 250)
 
     }
