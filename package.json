@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
-    "gdax": "^0.6.0",
+    "gdax": "^0.1.0",
     "mysql": "^2.15.0",
     "node-cron": "^1.2.1"
   },
