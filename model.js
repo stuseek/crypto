@@ -1,33 +1,33 @@
 let mysql = require('mysql');
-let config = require('./config');
+let core = require('./core');
 
 let res = {};
 
-let con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "course"
+
+
+core.getConfig().then(function (config) {
+    setInterval(() => {
+        getDataFromDB()
+    }, 10000);
+
+    let con = mysql.createConnection(config.db)
+
+    function getDataFromDB() {
+        con.connect(err => {
+            core.getCoinList().forEach((item, i) => {
+                con.query("SELECT rate, daily_rate FROM rates where code = '" + item + "'", (error, result) => {
+                    if (error) {
+                        console.log(error);
+                    }
+                    res[item] = result;
+                })
+            })
+        });
+    }
+
+    getDataFromDB();
 });
 
-setInterval(() => {
-    getDataFromDB()
-}, 10000);
-
-function getDataFromDB() {
-    con.connect(err => {
-        config.getCoinList().forEach((item, i) => {
-            con.query("SELECT rate, daily_rate FROM rates where code = '" + item + "'", (error, result) => {
-                if (error) {
-                    console.log(error);
-                }
-                res[item] = result;
-            })
-        })
-    });
-}
-
-getDataFromDB();
 
 exports.getData = function () {
     return res;

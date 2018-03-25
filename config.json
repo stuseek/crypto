@@ -1,0 +1,12 @@
+{
+  "db": {
+    "host": "localhost",
+    "user": "root",
+    "password": "",
+    "database": "course"
+  },
+  "domain": {
+    "name": "currency.buba.io/",
+    "port": "8081"
+  }
+}

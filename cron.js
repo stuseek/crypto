@@ -1,19 +1,14 @@
-let cron = require('node-cron');
 let Gdax = require('gdax');
-let publicClient = new Gdax.PublicClient();
 let mysql = require('mysql');
-let config = require('./config')
+let publicClient = new Gdax.PublicClient();
+let core = require('./core')
 
-let con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "course"
-});
 
-setInterval(() => {
-    con.connect(function (err) {
-        config.getCoinList().forEach((item, i) => {
+core.getConfig().then(function (config) {
+    let con = mysql.createConnection(config.db);
+
+    setInterval(() => {
+        core.getCoinList().forEach((item, i) => {
             publicClient.getProduct24HrStats(item + '-USD')
                 .then(data => {
                     let daily_rate;
@@ -35,5 +30,6 @@ setInterval(() => {
                     console.log(data)
                 });
         });
-    });
-}, 14000);
+    }, 14000);
+});
+
