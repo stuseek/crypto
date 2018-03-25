@@ -4,12 +4,13 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
-    "bluebird": "^3.5.1",
     "gdax": "github:coinbase/gdax-node",
     "mysql": "^2.15.0",
     "node-cron": "^1.2.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "bluebird": "^3.5.1"
+  },
   "scripts": {
     "test": "test",
     "start": "node server.js"
