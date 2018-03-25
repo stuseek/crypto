@@ -1,7 +1,7 @@
 function getRates() {
     $.ajax({
         url: '/getRates'
-    }).promise().done(data => {
+    }).done(function(data) {
         $('.currency').each(function (i, item) {
             let code = $(this).attr('data-code');
             updateRates(code, data[code][0], i);
