@@ -9,6 +9,7 @@ http.createServer(function (req, res) {
         if (req.url === '/getRates') {
             res.writeHead(200, {'Content-Type': 'application/json'});
             res.write(JSON.stringify(model.getData()));
+            res.write('test')
             res.end()
         } else {
             if (req.url.indexOf('/images/') > -1) {
@@ -26,4 +27,4 @@ http.createServer(function (req, res) {
             }
         }
     });
-}).listen(8081);
+}).listen(80);
